@@ -26,10 +26,39 @@ RCT_EXPORT_MODULE()
   });
 }
 
+#pragma mark - Android-only FD stubs (iOS)
+
+- (void)getContentFd:(NSString *)uri
+             resolve:(RCTPromiseResolveBlock)resolve
+              reject:(RCTPromiseRejectBlock)reject
+{
+  reject(
+    @"UNSUPPORTED_PLATFORM",
+    @"getContentFd is not supported on iOS",
+    nil
+  );
+}
+
+- (void)closeFd:(NSString *)fdOrPath
+        resolve:(RCTPromiseResolveBlock)resolve
+         reject:(RCTPromiseRejectBlock)reject
+{
+  // No-op stub for iOS
+  resolve(@(YES));
+}
+
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
     (const facebook::react::ObjCTurboModule::InitParams &)params
 {
     return std::make_shared<facebook::react::NativeReactNativeLocalDownloadSpecJSI>(params);
+}
+
+- (void)persistContentPermission:(NSString *)uri
+                          resolve:(RCTPromiseResolveBlock)resolve
+                           reject:(RCTPromiseRejectBlock)reject
+{
+  // iOS sandbox does not support persistable URI permissions
+  resolve(@(YES));
 }
 
 @end
