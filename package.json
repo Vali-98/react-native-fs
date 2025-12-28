@@ -1,6 +1,6 @@
 {
   "name": "@vali98/react-native-fs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Download folder access for react-native",
   "source": "./src/index.tsx",
   "main": "./lib/module/index.js",
